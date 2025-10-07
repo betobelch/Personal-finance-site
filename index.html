@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanças Pessoais</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+         Header 
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h1>Finanças Pessoais</h1>
+            </div>
+            <div class="current-month" id="currentMonth"></div>
+        </header>
+
+         Navigation Tabs 
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="renda">Renda</button>
+            <button class="tab-btn" data-tab="gastos-fixos">Gastos Fixos</button>
+            <button class="tab-btn" data-tab="gastos-variaveis">Gastos Variáveis</button>
+            <button class="tab-btn" data-tab="calendario">Calendário</button>
+        </nav>
+
+         Main Content 
+        <main class="main-content">
+             Summary Cards 
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>Renda Total</h3>
+                    <p class="amount positive" id="totalIncome">R$ 0,00</p>
+                </div>
+                <div class="card">
+                    <h3>Gastos Fixos</h3>
+                    <p class="amount negative" id="totalFixed">R$ 0,00</p>
+                </div>
+                <div class="card">
+                    <h3>Gastos Variáveis</h3>
+                    <p class="amount negative" id="totalVariable">R$ 0,00</p>
+                </div>
+                <div class="card highlight">
+                    <h3>Saldo</h3>
+                    <p class="amount" id="balance">R$ 0,00</p>
+                </div>
+            </div>
+
+             Charts Section 
+            <div class="charts-section">
+                <div class="chart-container">
+                    <h3>Distribuição de Gastos</h3>
+                    <canvas id="expensesChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Evolução Mensal</h3>
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+
+             Tab Content: Renda 
+            <div class="tab-content active" id="renda">
+                <div class="content-header">
+                    <h2>Renda Mensal</h2>
+                    <button class="btn-add" onclick="openModal('renda')">+ Adicionar Renda</button>
+                </div>
+                <div class="items-list" id="incomeList"></div>
+            </div>
+
+             Tab Content: Gastos Fixos 
+            <div class="tab-content" id="gastos-fixos">
+                <div class="content-header">
+                    <h2>Gastos Fixos</h2>
+                    <button class="btn-add" onclick="openModal('gastos-fixos')">+ Adicionar Gasto Fixo</button>
+                </div>
+                <div class="items-list" id="fixedList"></div>
+            </div>
+
+             Tab Content: Gastos Variáveis 
+            <div class="tab-content" id="gastos-variaveis">
+                <div class="content-header">
+                    <h2>Gastos Variáveis</h2>
+                    <button class="btn-add" onclick="openModal('gastos-variaveis')">+ Adicionar Gasto Variável</button>
+                </div>
+                <div class="items-list" id="variableList"></div>
+            </div>
+
+             Tab Content: Calendário 
+            <div class="tab-content" id="calendario">
+                <div class="content-header">
+                    <h2>Calendário Financeiro</h2>
+                    <div class="calendar-nav">
+                        <button class="btn-nav" onclick="changeMonth(-1)">←</button>
+                        <span id="calendarMonth"></span>
+                        <button class="btn-nav" onclick="changeMonth(1)">→</button>
+                    </div>
+                </div>
+                <div class="calendar" id="calendar"></div>
+            </div>
+        </main>
+    </div>
+
+     Modal 
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Adicionar Item</h2>
+                <button class="btn-close" onclick="closeModal()">×</button>
+            </div>
+            <form id="itemForm">
+                <div class="form-group">
+                    <label for="itemName">Descrição</label>
+                    <input type="text" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemAmount">Valor (R$)</label>
+                    <input type="number" id="itemAmount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemDate">Data</label>
+                    <input type="date" id="itemDate" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
